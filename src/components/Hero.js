@@ -4,7 +4,7 @@ import imageDesktop from "../assets/home/desktop/image-hero.jpg";
 import imageTablet from "../assets/home/tablet/image-header.jpg";
 const Hero = () => {
   return (
-    <div className="w-screen max-w-full h-80 relative lg:min-h-screen">
+    <div className="w-screen max-w-full min-h-80 relative lg:min-h-screen ">
       <img
         className="block w-screen h-full md:hidden"
         src={imageMobile}

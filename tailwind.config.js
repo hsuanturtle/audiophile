@@ -18,8 +18,11 @@ module.exports = {
     },
     extend: {
       height: {
+        4: "4rem",
         20: "20vh",
+        30: "30vh",
         40: "40vh",
+        60: "60vh",
         80: "80vh",
         50: "50vh",
         70: "70vh",

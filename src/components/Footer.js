@@ -1,33 +1,38 @@
 import React from "react";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { topFunction } from "../utils/helper";
 const Footer = () => {
   return (
-    <div className="min-h-80 bg-light-dark text-white text-center lg:min-h-50">
+    <div className="min-h-80 bg-light-dark text-white text-center mt-4 lg:min-h-50">
       <div className="bg-light-beige h-1 w-2/5 m-auto"></div>
       <h1 className="text-4xl font-bold mt-10">audiophile</h1>
       <div className="mt-10 tracking-medium">
         <Link
           className="flex flex-col hover:text-light-beige py-4 lg:inline-flex lg:px-8"
           to="/"
+          onClick={() => topFunction()}
         >
           HOME
         </Link>
         <Link
           className="flex flex-col hover:text-light-beige py-4 lg:inline-flex lg:px-8"
           to="/headphones"
+          onClick={() => topFunction()}
         >
           HEADPHONES
         </Link>
         <Link
           className="flex flex-col hover:text-light-beige py-4 lg:inline-flex lg:px-8"
           to="/speaker"
+          onClick={() => topFunction()}
         >
           SPEAKERS
         </Link>
         <Link
           className="flex flex-col hover:text-light-beige py-4 lg:inline-flex lg:px-8"
           to="/earphones"
+          onClick={() => topFunction()}
         >
           EARPHONES
         </Link>
