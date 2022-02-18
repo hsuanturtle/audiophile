@@ -1,7 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import imageMobile from "../assets/home/mobile/image-header.jpg";
 import imageDesktop from "../assets/home/desktop/image-hero.jpg";
 import imageTablet from "../assets/home/tablet/image-header.jpg";
+import { topFunction } from "../utils/helper";
 const Hero = () => {
   return (
     <div className="w-screen max-w-full min-h-80 relative lg:min-h-screen ">
@@ -24,13 +26,17 @@ const Hero = () => {
         <h3 className="tracking-wide mb-6 ">NEW PRODUCT</h3>
         <h1 className="m-auto text-5xl xl:text-6xl">XX99 MARK II</h1>
         <h1 className="m-auto text-5xl xl:text-6xl">HEADPHONES</h1>
-        <p className="mt-6 tracking-wildest leading-loose lg:tracking-medium">
+        <p className="mt-6 mb-14 tracking-wildest leading-loose lg:tracking-medium">
           Experience natural, lifelike audio and exceptional build quality made
           for the passionate music enthusiast
         </p>
-        <button className="mt-14 bg-light-beige px-8 py-4 font-bold hover:bg-vanilla ease-linear duration-300">
+        <Link
+          to="/products/xx99-mark-two-headphones"
+          onClick={() => topFunction()}
+          className="mt-14 bg-light-beige px-8 py-4 font-bold hover:bg-vanilla ease-linear duration-300"
+        >
           SEE PRODUCT
-        </button>
+        </Link>
       </div>
     </div>
   );

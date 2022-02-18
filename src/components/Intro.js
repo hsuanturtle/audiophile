@@ -10,19 +10,20 @@ const Intro = () => {
           src={introImg}
           alt="A man with headphone"
         />
+
         <img
-          className="rounded-lg hidden lg:block lg:h- lg:w-50"
+          className="rounded-lg hidden lg:block lg:w-50 "
           src={introImgDesktop}
           alt="A man with a headphone"
         />
       </div>
-      <div className="mt-14 mb-14 lg:w-5/12">
-        <h1 className="text-4xl font-bold md:text-6xl">
+      <div className="mt-14 mb-14 lg:w-11/12 xl:w-10/12">
+        <h1 className="text-4xl font-bold 2xl:text-6xl lg:text-3xl">
           BRINGING YOU THE <span className="text-light-beige">BEST</span> AUDIO
           GEAR
         </h1>
 
-        <p className="mt-14 text-dark-grey md:text-xl">
+        <p className="mt-14 text-dark-grey md:text-xl lg:text-lg xl:text-2xl 2xl:text-xl">
           Located at the heart of New York City, Audiophile is the premier store
           for high end headphones, earphones,speakers, and audio accessories. We
           have a large showroom and luxury demonstration rooms available for you
