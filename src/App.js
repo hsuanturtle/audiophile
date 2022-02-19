@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
-import PayPage from "./pages/PayPage";
+import CheckoutPage from "./pages/CheckoutPage";
 import HeadPhonesPage from "./pages/HeadPhonesPage";
 import EarphonesPage from "./pages/EarphonesPage";
 import SpeakerPage from "./pages/SpeakerPage";
@@ -11,7 +11,7 @@ import ErrorPage from "./pages/ErrorPage";
 import Footer from "./components/Footer";
 function App() {
   const products = useSelector((state) => state.products);
-  console.log(products);
+
   return (
     <BrowserRouter>
       <Navbar />
@@ -29,7 +29,7 @@ function App() {
             />
           );
         })}
-        <Route path="/pay" element={<PayPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />

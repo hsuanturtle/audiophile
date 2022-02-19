@@ -101,24 +101,24 @@ const reducer = (state = initialState, action = {}) => {
         },
       };
     }
-    // case REMOVE_CART_ITEMS: {
-    //   const productsInCart = state.cart.products;
-    //   const indexProduct = productsInCart.findIndex(
-    //     (product) => product.id === action.product.id
-    //   );
-    //   if (action.product.quantityInCart === 1)
-    //     productsInCart.splice(indexProduct, 1);
-    //   else productsInCart[indexProduct].quantityInCart -= 1;
-    //   return {
-    //     ...state,
-    //     cart: {
-    //       ...state.cart,
-    //       totalPrice: state.cart.totalPrice - action.payload.product.price,
-    //       totalProduct: state.cart.totalProduct - 1,
-    //       products: productsInCart,
-    //     },
-    //   };
-    // }
+    case REMOVE_CART_ITEMS: {
+      const productsInCart = state.cart.products;
+      const indexProduct = productsInCart.findIndex(
+        (product) => product.id === action.payload.product.id
+      );
+      if (action.payload.product.quantityInCart === 1)
+        productsInCart.splice(indexProduct, 1);
+      else productsInCart[indexProduct].quantityInCart -= 1;
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          totalPrice: state.cart.totalPrice - action.payload.product.price,
+          totalProduct: state.cart.totalProduct - 1,
+          products: productsInCart,
+        },
+      };
+    }
 
     default:
       return { ...state };

@@ -30,6 +30,9 @@ module.exports = {
       translate: {
         500: "-50%",
       },
+      boxShadow: {
+        "4xl": "5px 5px 40px rgba(0,0,0,0.6)",
+      },
     },
   },
   plugins: [],
