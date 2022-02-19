@@ -3,6 +3,7 @@ export const products = [
     id: 1,
     slug: "yx1-earphones",
     name: "YX1 Wireless Earphones",
+    nickname: "YX1",
     image: {
       mobile: "../assets/product-yx1-earphones/mobile/image-product.jpg",
       tablet: "../assets/product-yx1-earphones/tablet/image-product.jpg",
@@ -97,6 +98,7 @@ export const products = [
     id: 2,
     slug: "xx59-headphones",
     name: "XX59 Headphones",
+    nickname: "XX59",
     image: {
       mobile: "../assets/product-xx59-headphones/mobile/image-product.jpg",
       tablet: "../assets/product-xx59-headphones/tablet/image-product.jpg",
@@ -191,6 +193,7 @@ export const products = [
     id: 3,
     slug: "xx99-mark-one-headphones",
     name: "XX99 Mark I Headphones",
+    nickname: "XX99 MK I",
     image: {
       mobile:
         "../assets/product-xx99-mark-one-headphones/mobile/image-product.jpg",
@@ -262,6 +265,7 @@ export const products = [
       {
         slug: "xx99-mark-two-headphones",
         name: "XX99 Mark II",
+
         image: {
           mobile: "../assets/shared/mobile/image-xx99-mark-two-headphones.jpg",
           tablet: "../assets/shared/tablet/image-xx99-mark-two-headphones.jpg",
@@ -272,6 +276,7 @@ export const products = [
       {
         slug: "xx59-headphones",
         name: "XX59",
+
         image: {
           mobile: "../assets/shared/mobile/image-xx59-headphones.jpg",
           tablet: "../assets/shared/tablet/image-xx59-headphones.jpg",
@@ -293,6 +298,7 @@ export const products = [
     id: 4,
     slug: "xx99-mark-two-headphones",
     name: "XX99 Mark II Headphones",
+    nickname: "XX99 MK II",
     image: {
       mobile:
         "../assets/product-xx99-mark-two-headphones/mobile/image-product.jpg",
@@ -399,6 +405,7 @@ export const products = [
     id: 5,
     slug: "zx7-speaker",
     name: "ZX7 Speaker",
+    nickname: "ZX7",
     image: {
       mobile: "../assets/product-zx7-speaker/mobile/image-product.jpg",
       tablet: "../assets/product-zx7-speaker/tablet/image-product.jpg",
@@ -493,6 +500,7 @@ export const products = [
     id: 6,
     slug: "zx9-speaker",
     name: "ZX9 Speaker",
+    nickname: "ZX9",
     image: {
       mobile: "../assets/product-zx9-speaker/mobile/image-product.jpg",
       tablet: "../assets/product-zx9-speaker/tablet/image-product.jpg",

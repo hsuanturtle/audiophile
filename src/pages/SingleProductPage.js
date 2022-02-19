@@ -6,18 +6,19 @@ import AddToCart from "../components/AddToCart";
 import ProductsImage from "../components/ProductsImage";
 import MayLike from "../components/MayLike";
 import { topFunction } from "../utils/helper";
-const SingleProductPage = ({
-  name,
-  id,
-  image,
-  old,
-  description,
-  price,
-  features,
-  includes,
-  gallery,
-  others,
-}) => {
+const SingleProductPage = ({ product }) => {
+  const {
+    name,
+    id,
+    image,
+    old,
+    description,
+    price,
+    features,
+    includes,
+    gallery,
+    others,
+  } = product;
   const navigate = useNavigate();
 
   // GO BACK TO PREVIOUS PAGE
@@ -59,7 +60,7 @@ const SingleProductPage = ({
           <p className="font-bold tracking-medium text-xl">${price}</p>
 
           {/* AMOUNTBUTTONS AND ADD TO CART */}
-          <AddToCart />
+          <AddToCart product={product}/>
         </div>
       </div>
 
