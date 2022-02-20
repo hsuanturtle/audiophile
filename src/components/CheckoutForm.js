@@ -7,6 +7,7 @@ import {
   DISPLAY_ERROR_EMAIL,
   DISPLAY_ERROR_ZIP,
   HANDLE_CHANGE_INPUT,
+  IS_CHECKOUT_FORM_VALID,
 } from "../utils/actions";
 
 const CheckoutForm = () => {
@@ -20,6 +21,7 @@ const CheckoutForm = () => {
     city: state.checkout.city,
     eMoney: state.checkout.eMoneyNumber,
     ePin: state.checkout.eMoneyPin,
+    paymentMethod: state.checkout.paymentMethod,
   }));
   const errorEmail = useSelector((state) => state.checkout.errorEmail);
   const errorZip = useSelector((state) => state.checkout.errorZip);
@@ -34,6 +36,7 @@ const CheckoutForm = () => {
     (paymentMethod) => {
       dispatch({ type: CHANGE_PAYMENT_METHOD, payload: { paymentMethod } });
     },
+
     [dispatch]
   );
   const handleChangeInput = useCallback(
@@ -48,6 +51,9 @@ const CheckoutForm = () => {
     },
     [dispatch]
   );
+  const isCheckoutFormValid = useCallback(() => {
+    dispatch({ type: IS_CHECKOUT_FORM_VALID });
+  });
   const submitHandler = (e) => {
     e.preventDefault();
   };
@@ -73,6 +79,7 @@ const CheckoutForm = () => {
           placeholder="Alexia Ward"
           value={value.name}
           onChange={(e) => changeHandler(e)}
+          onBlur={() => isCheckoutFormValid()}
         />
       </div>
       <div className="flex flex-col gap-2">
@@ -90,11 +97,15 @@ const CheckoutForm = () => {
           placeholder="alexei@mail.com"
           inputMode="email"
           value={value.email}
-          onFocus={(e) => clearErrorInput(e.target.value)}
+          onFocus={(e) => clearErrorInput(e.target.name)}
           onBlur={(e) => {
             if (validateEmail(e.target.value) === false) {
               displayErrorEmail();
             }
+            isCheckoutFormValid();
+          }}
+          onChange={(e) => {
+            changeHandler(e);
           }}
         />
       </div>
@@ -108,6 +119,10 @@ const CheckoutForm = () => {
           name="phone"
           placeholder="0978-123-456"
           required
+          value={value.phone}
+          inputMode="tel"
+          onChange={(e) => changeHandler(e)}
+          onBlur={() => isCheckoutFormValid()}
         />
       </div>
       <p className="text-light-beige">SHIPPING INFO</p>
@@ -119,6 +134,9 @@ const CheckoutForm = () => {
           className="border border-dark-grey rounded-lg px-4 py-6"
           name="address"
           placeholder="1137 Williams Avenue"
+          value={value.address}
+          onChange={(e) => changeHandler(e)}
+          onBlur={() => isCheckoutFormValid()}
         />
       </div>
       <div className="flex flex-col gap-2">
@@ -140,7 +158,10 @@ const CheckoutForm = () => {
             if (validateZip(e.target.value) === false) {
               displayErrorZip();
             }
+            isCheckoutFormValid();
           }}
+          onFocus={(e) => clearErrorInput(e.target.name)}
+          onChange={(e) => changeHandler(e)}
         />
       </div>
       <div className="flex flex-col gap-2">
@@ -151,6 +172,9 @@ const CheckoutForm = () => {
           className="border border-dark-grey rounded-lg px-4 py-6"
           name="city"
           placeholder="Taipei"
+          value={value.city}
+          onChange={(e) => changeHandler(e)}
+          onBlur={() => isCheckoutFormValid()}
         />
       </div>
       <div className="flex flex-col gap-2">
@@ -161,6 +185,9 @@ const CheckoutForm = () => {
           className="border border-dark-grey rounded-lg px-4 py-6"
           name="country"
           placeholder="Taiwan"
+          value={value.country}
+          onChange={(e) => changeHandler(e)}
+          onBlur={() => isCheckoutFormValid()}
         />
       </div>
       <p className="text-light-beige">PAYMENT DETAILS</p>
@@ -173,42 +200,73 @@ const CheckoutForm = () => {
             id="emoney"
             name="payment"
             value="emoney"
+            onClick={() => {
+              changePaymentMethod("e-Money");
+              isCheckoutFormValid();
+            }}
           />
           <label className="font-bold" htmlFor="emoney">
             e-Money
           </label>
         </div>
         <div className="flex items-center border border-dark-grey rounded-lg px-4 py-6 gap-4">
-          <input id="cash" name="payment" type="radio" />
+          <input
+            id="cash"
+            name="payment"
+            type="radio"
+            onClick={() => {
+              changePaymentMethod("Cash");
+              isCheckoutFormValid();
+            }}
+          />
           <label className="font-bold" htmlFor="cash">
             Cash on Delivery
           </label>
         </div>
       </div>
-      <div className="flex flex-col gap-2">
-        <label className="font-bold" htmlFor="e-number">
-          e-Money Number
-        </label>
-        <input
-          className="border border-dark-grey rounded-lg px-4 py-6"
-          name="e-number"
-          placeholder="238521993"
-          inputMode="numeric"
-          type="number"
-        />
-      </div>
-      <div className="flex flex-col gap-2">
-        <label className="font-bold" htmlFor="e-pin">
-          e-Money PIN
-        </label>
-        <input
-          className="border border-dark-grey rounded-lg px-4 py-6"
-          name="e-pin"
-          placeholder="689"
-          inputMode="numeric"
-          type="number"
-        />
-      </div>
+      {value.paymentMethod === "e-Money" && (
+        <div>
+          <div className="flex flex-col gap-2">
+            <label className="font-bold" htmlFor="e-number">
+              e-Money Number
+            </label>
+            <input
+              className="border border-dark-grey rounded-lg px-4 py-6"
+              name="e-number"
+              placeholder="238521993"
+              inputMode="numeric"
+              type="number"
+              value={value.eMoney}
+              onChange={(e) => changeHandler(e)}
+              onBlur={() => isCheckoutFormValid()}
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <label className="font-bold" htmlFor="e-pin">
+              e-Money PIN
+            </label>
+            <input
+              className="border border-dark-grey rounded-lg px-4 py-6"
+              name="e-pin"
+              placeholder="689"
+              inputMode="numeric"
+              type="number"
+              value={value.ePin}
+              onChange={(e) => changeHandler(e)}
+              onBlur={() => isCheckoutFormValid()}
+            />
+          </div>
+        </div>
+      )}
+      {value.paymentMethod === "Cash" && (
+        <div className="text-center">
+          <p className="font-bold text-dark-grey">
+            The ‘Cash on Delivery’ option enables you to pay in cash when our
+            delivery courier arrives at your residence. Just make sure your
+            address is correct so that your order will not be cancelled.
+          </p>
+        </div>
+      )}
     </form>
   );
 };
