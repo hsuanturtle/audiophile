@@ -11,10 +11,10 @@ const AmountButtons = () => {
   const dispatch = useDispatch();
   const minusAmount = useCallback(() => {
     dispatch({ type: MINUS_ADD_TO_CART_AMOUNT }, [dispatch]);
-  });
+  }, [dispatch]);
   const addAmount = useCallback(() => {
     dispatch({ type: ADD_ADD_TO_CART_AMOUNT }, [dispatch]);
-  });
+  }, [dispatch]);
 
   return (
     <div className="flex bg-light-grey w-3/5 m-auto justify-around items-center gap-2 h-4">

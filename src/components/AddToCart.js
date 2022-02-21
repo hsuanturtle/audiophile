@@ -4,9 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { ADD_TO_CART } from "../utils/actions";
 const AddToCart = ({ product }) => {
   const dispatch = useDispatch();
-  const addToCart = useCallback((product) => {
-    dispatch({ type: ADD_TO_CART, payload: { product } }, [dispatch]);
-  });
+  const addToCart = useCallback(
+    (product) => {
+      dispatch({ type: ADD_TO_CART, payload: { product } }, [dispatch]);
+    },
+    [dispatch]
+  );
 
   return (
     <div className="w-10/12 m-auto mt-6 flex justify-center gap-4 flex-col md:flex-row md:justify-around lg:flex-col">

@@ -9,6 +9,7 @@ import SpeakerPage from "./pages/SpeakerPage";
 import SingleProductPage from "./pages/SingleProductPage";
 import ErrorPage from "./pages/ErrorPage";
 import Footer from "./components/Footer";
+
 function App() {
   const products = useSelector((state) => state.products);
 

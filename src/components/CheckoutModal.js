@@ -3,18 +3,27 @@ import check from "../assets/icon-checkout.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { topFunction } from "../utils/helper";
-import { DISPLAY_CHECKOUT_MODAL } from "../utils/actions";
+import { CLEAR_CART, CLOSE_CHECKOUT_MODAL } from "../utils/actions";
 const CheckoutModal = () => {
+  const dispatch = useDispatch();
   const totalPrice = useSelector((state) => state.cart.totalPrice);
-
   const productsInCart = useSelector((state) => state.cart.products);
+  const clearCart = useCallback(() => {
+    dispatch({ type: CLEAR_CART });
+  }, [dispatch]);
+
+  const closeModal = useCallback(() => {
+    dispatch({ type: CLOSE_CHECKOUT_MODAL });
+  }, [dispatch]);
   const backHandler = () => {
+    closeModal();
     document.body.style.overflow = "scroll";
     topFunction();
+    clearCart();
   };
   return (
     <div className="relative z-20 bg-black">
-      <div className="text-center fixed top-0 left-4 w-11/12 rounded-xl z-30 h-80 bg-white shadow-5xl">
+      <div className="text-center fixed top-4 left-4 w-11/12 rounded-xl z-30 h-80 bg-white shadow-5xl xl:left-20">
         <div className=" p-8 flex flex-col gap-4">
           <img className="h-16" src={check} alt="check" />
           <h1 className="font-bold text-4xl">THANK YOU FOR YOUR ORDER</h1>
@@ -55,7 +64,7 @@ const CheckoutModal = () => {
           <Link
             to="/"
             className="absolute bottom-10 m-auto text-center w-10/12 bg-light-beige text-white px-8 py-4 hover:bg-vanilla ease-linear duration-300"
-            onClick={backHandler}
+            onClick={() => backHandler()}
           >
             BACK TO HOME
           </Link>

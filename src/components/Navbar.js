@@ -28,13 +28,9 @@ function Navbar() {
       }),
     [dispatch]
   );
-  const noscroll = () => {
-    window.scrollTo(0, 0);
-  };
+
   const displayHandler = () => {
     setDisplayCart(!displayCart);
-    window.addEventListener("scroll", noscroll);
-    window.removeEventListener("scroll", noscroll);
   };
 
   return (

@@ -14,7 +14,7 @@ const CheckoutForm = () => {
   const value = useSelector((state) => ({
     phone: state.checkout.phone,
     name: state.checkout.name,
-    email: state.checkout.email,
+    email: state.checkout.Email,
     address: state.checkout.address,
     zip: state.checkout.Zip,
     country: state.checkout.country,
@@ -26,17 +26,19 @@ const CheckoutForm = () => {
   const errorEmail = useSelector((state) => state.checkout.errorEmail);
   const errorZip = useSelector((state) => state.checkout.errorZip);
   const dispatch = useDispatch();
+
   const displayErrorEmail = useCallback(() => {
     dispatch({ type: DISPLAY_ERROR_EMAIL });
   }, [dispatch]);
+
   const displayErrorZip = useCallback(() => {
     dispatch({ type: DISPLAY_ERROR_ZIP });
   }, [dispatch]);
+
   const changePaymentMethod = useCallback(
     (paymentMethod) => {
       dispatch({ type: CHANGE_PAYMENT_METHOD, payload: { paymentMethod } });
     },
-
     [dispatch]
   );
   const handleChangeInput = useCallback(
@@ -53,13 +55,13 @@ const CheckoutForm = () => {
   );
   const isCheckoutFormValid = useCallback(() => {
     dispatch({ type: IS_CHECKOUT_FORM_VALID });
-  });
+  },[dispatch]);
+
   const submitHandler = (e) => {
     e.preventDefault();
   };
   const changeHandler = (e) => {
     handleChangeInput(e.target.name, e.target.value);
-    console.log(e.target.name, e.target.value);
   };
   return (
     <form
@@ -93,7 +95,7 @@ const CheckoutForm = () => {
               ? "border-2 border-light-beige rounded-lg px-4 py-6"
               : "border border-dark-grey rounded-lg px-4 py-6"
           }
-          name="email"
+          name="Email"
           placeholder="alexei@mail.com"
           inputMode="email"
           value={value.email}
@@ -150,7 +152,7 @@ const CheckoutForm = () => {
               ? "border-2 border-light-beige rounded-lg px-4 py-6"
               : "border border-dark-grey rounded-lg px-4 py-6"
           }
-          name="zip"
+          name="Zip"
           placeholder="30634"
           inputMode="numeric"
           type="number"
@@ -195,11 +197,11 @@ const CheckoutForm = () => {
         <label className="font-bold">Payment Method</label>
         <div className="flex items-center border border-dark-grey rounded-lg px-4 py-6 gap-4">
           <input
-            checked
+            defaultChecked
             type="radio"
             id="emoney"
             name="payment"
-            value="emoney"
+            value={value.paymentMethod}
             onClick={() => {
               changePaymentMethod("e-Money");
               isCheckoutFormValid();
@@ -214,6 +216,7 @@ const CheckoutForm = () => {
             id="cash"
             name="payment"
             type="radio"
+            value="cash"
             onClick={() => {
               changePaymentMethod("Cash");
               isCheckoutFormValid();

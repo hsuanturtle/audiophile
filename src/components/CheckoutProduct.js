@@ -10,7 +10,7 @@ const CheckoutProduct = () => {
         return (
           <div
             key={product.id}
-            className="flex gap-8 justify-around items-center"
+            className="flex gap-8 justify-around px-4 items-center"
           >
             <img
               className="h-24 rounded-xl"
@@ -44,9 +44,6 @@ const CheckoutProduct = () => {
           $ {shippingFee + totalPrice}
         </h3>
       </div>
-      <button className="text-center m-auto w-10/12 bg-light-beige text-white px-8 py-4 hover:bg-vanilla ease-linear duration-300">
-        CONTINUE & PAY
-      </button>
     </div>
   );
 };

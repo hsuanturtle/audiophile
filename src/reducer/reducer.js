@@ -3,25 +3,59 @@ import {
   DISPLAY_CART,
   ADD_TO_CART,
   CLEAR_CART,
-  COUNT_CART_TOTALS,
   MINUS_ADD_TO_CART_AMOUNT,
   ADD_ADD_TO_CART_AMOUNT,
   ADD_QUANTITY_PRODUCT_IN_CART,
   REMOVE_CART_ITEMS,
+  CHANGE_PAYMENT_METHOD,
+  HANDLE_CHANGE_INPUT,
+  DISPLAY_ERROR_EMAIL,
+  DISPLAY_ERROR_ZIP,
+  CLEAR_ERROR_INPUT,
+  IS_CHECKOUT_FORM_VALID,
+  DISPLAY_CHECKOUT_MODAL,
+  CLOSE_CHECKOUT_MODAL,
 } from "../utils/actions";
+
+const getLocalStorage = () => {
+  let products = localStorage.getItem("products");
+  if (products) {
+    return JSON.parse(products);
+  } else {
+    return [];
+  }
+};
 const initialState = {
   products,
   addCartQuantity: 1,
   cart: {
-    products: [],
+    products: getLocalStorage(),
     totalPrice: 0,
     totalProduct: 0,
     display: false,
+  },
+  checkout: {
+    phone: "",
+    name: "",
+    Email: "",
+    address: "",
+    Zip: "",
+    country: "",
+    city: "",
+    eMoneyNumber: "",
+    eMoneyPin: "",
+    paymentMethod: "e-Money",
+    errorEmail: false,
+    errorZip: false,
+    isCheckoutFormValid: false,
+    checkoutModal: false,
+    shippingFee: 50,
   },
 };
 const reducer = (state = initialState, action = {}) => {
   console.log({ state, action });
   switch (action.type) {
+    // display cart when click on cart btn
     case DISPLAY_CART:
       return {
         ...state,
@@ -31,6 +65,7 @@ const reducer = (state = initialState, action = {}) => {
         },
       };
 
+    //control the amount of the product that will be added to the cart
     case MINUS_ADD_TO_CART_AMOUNT: {
       let newAddCartAmount = state.addCartQuantity - 1;
       if (state.addCartQuantity === 1) {
@@ -48,6 +83,7 @@ const reducer = (state = initialState, action = {}) => {
         addCartQuantity: state.addCartQuantity + 1,
       };
 
+    //add product to cart
     case ADD_TO_CART: {
       const newCartProducts = [...state.cart.products];
       const addedProduct = {
@@ -73,6 +109,7 @@ const reducer = (state = initialState, action = {}) => {
       };
     }
 
+    //remove all products from cart
     case CLEAR_CART:
       return {
         ...state,
@@ -85,6 +122,7 @@ const reducer = (state = initialState, action = {}) => {
         },
       };
 
+    //control how many of each product in cart
     case ADD_QUANTITY_PRODUCT_IN_CART: {
       const productsInCart = state.cart.products;
       const indexProduct = productsInCart.findIndex(
@@ -101,6 +139,8 @@ const reducer = (state = initialState, action = {}) => {
         },
       };
     }
+
+    //remove single product in cart
     case REMOVE_CART_ITEMS: {
       const productsInCart = state.cart.products;
       const indexProduct = productsInCart.findIndex(
@@ -120,6 +160,123 @@ const reducer = (state = initialState, action = {}) => {
       };
     }
 
+    //change payment method:cash or eMoney
+    case CHANGE_PAYMENT_METHOD:
+      return {
+        ...state,
+        checkout: {
+          ...state.checkout,
+          paymentMethod: action.payload.paymentMethod,
+        },
+      };
+
+    //changeHandler for each input in checkout form
+    case HANDLE_CHANGE_INPUT:
+      return {
+        ...state,
+        checkout: {
+          ...state.checkout,
+          [action.payload.name]: action.payload.value,
+        },
+      };
+
+    //detect the error email
+    case DISPLAY_ERROR_EMAIL:
+      return {
+        ...state,
+        checkout: {
+          ...state.checkout,
+          errorEmail: true,
+        },
+      };
+
+    //detect the error zip
+    case DISPLAY_ERROR_ZIP:
+      return {
+        ...state,
+        checkout: {
+          ...state.checkout,
+          errorZip: true,
+        },
+      };
+
+    //clear the error input
+    case CLEAR_ERROR_INPUT: {
+      const { inputName } = action.payload;
+      const error = "error";
+      const concat = error.concat("", inputName);
+
+      return {
+        ...state,
+        checkout: {
+          ...state.checkout,
+          [concat]: false,
+        },
+      };
+    }
+
+    //check the validation of the form
+    case IS_CHECKOUT_FORM_VALID: {
+      let fieldsEmpty = 0;
+      const {
+        phone,
+        name,
+        Email,
+        address,
+        Zip,
+        country,
+        city,
+        eMoneyNumber,
+        eMoneyPin,
+        paymentMethod,
+        errorEmail,
+        errorZip,
+      } = state.checkout;
+      const inputs = [name, Email, phone, address, Zip, country, city];
+      inputs.forEach((input) => {
+        if (input === "") {
+          fieldsEmpty += 1;
+        }
+      });
+      if (
+        paymentMethod === "e-Money" &&
+        (eMoneyNumber === "" || eMoneyPin === "")
+      ) {
+        fieldsEmpty += 1;
+      }
+      let isCheckoutFormValid = false;
+      if (fieldsEmpty === 0 && errorEmail === false && errorZip === false) {
+        isCheckoutFormValid = true;
+      }
+
+      return {
+        ...state,
+        checkout: {
+          ...state.checkout,
+          isCheckoutFormValid,
+        },
+      };
+    }
+
+    //display the checkout modal
+    case DISPLAY_CHECKOUT_MODAL: {
+      return {
+        ...state,
+        checkout: {
+          ...state.checkout,
+          checkoutModal: true,
+        },
+      };
+    }
+    case CLOSE_CHECKOUT_MODAL: {
+      return {
+        ...state,
+        checkout: {
+          ...state.checkout,
+          checkoutModal: false,
+        },
+      };
+    }
     default:
       return { ...state };
   }
