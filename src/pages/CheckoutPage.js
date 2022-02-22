@@ -15,20 +15,27 @@ const PayPage = () => {
     navigate(-1);
     topFunction();
   };
+
+  // USESLECTOR
   const checkoutModal = useSelector((state) => state.checkout.checkoutModal);
   const checkoutFormValid = useSelector(
     (state) => state.checkout.isCheckoutFormValid
   );
+
+  //USEDISPATCH
   const dispatch = useDispatch();
   const showModal = useCallback(() => {
     dispatch({ type: DISPLAY_CHECKOUT_MODAL });
   }, [dispatch]);
+  
+  //SHOW MODAL AFTER PAYING
   const ModalHandler = () => {
     showModal();
     if (checkoutModal === true) {
       document.body.style.overflow = "hidden";
     }
   };
+
 
   return (
     <div className="min-h-screen m-auto bg-light-grey py-20">

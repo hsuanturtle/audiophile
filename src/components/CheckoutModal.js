@@ -5,9 +5,12 @@ import { Link } from "react-router-dom";
 import { topFunction } from "../utils/helper";
 import { CLEAR_CART, CLOSE_CHECKOUT_MODAL } from "../utils/actions";
 const CheckoutModal = () => {
-  const dispatch = useDispatch();
+  //USESLECTOR
   const totalPrice = useSelector((state) => state.cart.totalPrice);
   const productsInCart = useSelector((state) => state.cart.products);
+
+  // USEDISPATCH
+  const dispatch = useDispatch();
   const clearCart = useCallback(() => {
     dispatch({ type: CLEAR_CART });
   }, [dispatch]);
@@ -15,9 +18,11 @@ const CheckoutModal = () => {
   const closeModal = useCallback(() => {
     dispatch({ type: CLOSE_CHECKOUT_MODAL });
   }, [dispatch]);
+
+  // GO BACK TO HOME AFTER PAYING
   const backHandler = () => {
     closeModal();
-    document.body.style.overflow = "scroll";
+    document.body.style.overflowY = "scroll";
     topFunction();
     clearCart();
   };

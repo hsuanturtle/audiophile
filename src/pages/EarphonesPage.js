@@ -5,7 +5,9 @@ import Intro from "../components/Intro";
 import ProductList from "../components/ProductList";
 import { useSelector } from "react-redux";
 const EarphonesPage = () => {
+  //USESELECTOR
   const display_products = useSelector((state) => state.products);
+
   return (
     <>
       <PageHeader title="EARPHONES" />

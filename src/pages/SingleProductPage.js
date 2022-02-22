@@ -9,7 +9,6 @@ import { topFunction } from "../utils/helper";
 const SingleProductPage = ({ product }) => {
   const {
     name,
-    id,
     image,
     old,
     description,

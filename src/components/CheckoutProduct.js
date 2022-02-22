@@ -1,9 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
 const CheckoutProduct = () => {
+  //USESLECTOR
   const productsInCart = useSelector((state) => state.cart.products);
   const shippingFee = useSelector((state) => state.checkout.shippingFee);
   const totalPrice = useSelector((state) => state.cart.totalPrice);
+  
   return (
     <div className="flex flex-col gap-4">
       {productsInCart.map((product) => {

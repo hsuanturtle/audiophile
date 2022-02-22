@@ -1,8 +1,9 @@
 import React, { useCallback } from "react";
 import AmountButtons from "./AmountButtons";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ADD_TO_CART } from "../utils/actions";
 const AddToCart = ({ product }) => {
+  //USEDISPATCH
   const dispatch = useDispatch();
   const addToCart = useCallback(
     (product) => {

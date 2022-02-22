@@ -6,8 +6,10 @@ import {
   ADD_ADD_TO_CART_AMOUNT,
 } from "../utils/actions";
 const AmountButtons = () => {
+  //USESLECTOR
   const amount = useSelector((state) => state.addCartQuantity);
-  console.log(amount);
+  
+  //USEDISPATCH
   const dispatch = useDispatch();
   const minusAmount = useCallback(() => {
     dispatch({ type: MINUS_ADD_TO_CART_AMOUNT }, [dispatch]);
@@ -16,6 +18,7 @@ const AmountButtons = () => {
     dispatch({ type: ADD_ADD_TO_CART_AMOUNT }, [dispatch]);
   }, [dispatch]);
 
+  
   return (
     <div className="flex bg-light-grey w-3/5 m-auto justify-around items-center gap-2 h-4">
       <button onClick={() => minusAmount()}>

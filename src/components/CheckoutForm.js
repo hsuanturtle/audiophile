@@ -11,6 +11,7 @@ import {
 } from "../utils/actions";
 
 const CheckoutForm = () => {
+  //USESELECTOR
   const value = useSelector((state) => ({
     phone: state.checkout.phone,
     name: state.checkout.name,
@@ -25,8 +26,9 @@ const CheckoutForm = () => {
   }));
   const errorEmail = useSelector((state) => state.checkout.errorEmail);
   const errorZip = useSelector((state) => state.checkout.errorZip);
-  const dispatch = useDispatch();
 
+  //USEDISPATCH
+  const dispatch = useDispatch();
   const displayErrorEmail = useCallback(() => {
     dispatch({ type: DISPLAY_ERROR_EMAIL });
   }, [dispatch]);
@@ -41,25 +43,30 @@ const CheckoutForm = () => {
     },
     [dispatch]
   );
+
   const handleChangeInput = useCallback(
     (name, value) => {
       dispatch({ type: HANDLE_CHANGE_INPUT, payload: { name, value } });
     },
     [dispatch]
   );
+
   const clearErrorInput = useCallback(
     (inputName) => {
       dispatch({ type: CLEAR_ERROR_INPUT, payload: { inputName } });
     },
     [dispatch]
   );
+
   const isCheckoutFormValid = useCallback(() => {
     dispatch({ type: IS_CHECKOUT_FORM_VALID });
-  },[dispatch]);
+  }, [dispatch]);
 
+  //PREVENT FORM SUBMIT
   const submitHandler = (e) => {
     e.preventDefault();
   };
+  //DETECT THE INPUT NAME AND VALUE
   const changeHandler = (e) => {
     handleChangeInput(e.target.name, e.target.value);
   };
@@ -72,6 +79,7 @@ const CheckoutForm = () => {
     >
       <p className="text-light-beige">BILLING DETAILS</p>
       <div className="flex flex-col gap-2">
+        {/* NAME */}
         <label className="font-bold" htmlFor="name">
           Name
         </label>
@@ -84,6 +92,8 @@ const CheckoutForm = () => {
           onBlur={() => isCheckoutFormValid()}
         />
       </div>
+
+      {/* EMAIL */}
       <div className="flex flex-col gap-2">
         <label className="font-bold" htmlFor="email">
           Email Address
@@ -112,6 +122,7 @@ const CheckoutForm = () => {
         />
       </div>
 
+      {/* PHONE NUMBER */}
       <div className="flex flex-col gap-2">
         <label className="font-bold" htmlFor="phone">
           Phone Number
@@ -128,6 +139,8 @@ const CheckoutForm = () => {
         />
       </div>
       <p className="text-light-beige">SHIPPING INFO</p>
+
+      {/* ADDRESS */}
       <div className="flex flex-col gap-2">
         <label className="font-bold" htmlFor="address">
           Your Address
@@ -141,6 +154,8 @@ const CheckoutForm = () => {
           onBlur={() => isCheckoutFormValid()}
         />
       </div>
+
+      {/* ZIP */}
       <div className="flex flex-col gap-2">
         <label className="font-bold" htmlFor="zip">
           ZIP Code
@@ -166,6 +181,8 @@ const CheckoutForm = () => {
           onChange={(e) => changeHandler(e)}
         />
       </div>
+
+      {/* CITY */}
       <div className="flex flex-col gap-2">
         <label className="font-bold" htmlFor="city">
           City
@@ -179,6 +196,8 @@ const CheckoutForm = () => {
           onBlur={() => isCheckoutFormValid()}
         />
       </div>
+
+      {/* COUNTRY */}
       <div className="flex flex-col gap-2">
         <label className="font-bold" htmlFor="country">
           Country
@@ -193,6 +212,8 @@ const CheckoutForm = () => {
         />
       </div>
       <p className="text-light-beige">PAYMENT DETAILS</p>
+
+      {/* PAYMENT METHOD */}
       <div className="flex flex-col gap-2">
         <label className="font-bold">Payment Method</label>
         <div className="flex items-center border border-dark-grey rounded-lg px-4 py-6 gap-4">
@@ -227,6 +248,8 @@ const CheckoutForm = () => {
           </label>
         </div>
       </div>
+
+      {/* PAYMENT METHOD- EMONEY */}
       {value.paymentMethod === "e-Money" && (
         <div>
           <div className="flex flex-col gap-2">
@@ -261,6 +284,8 @@ const CheckoutForm = () => {
           </div>
         </div>
       )}
+
+      {/* PAYMENT METHOD CASH */}
       {value.paymentMethod === "Cash" && (
         <div className="text-center">
           <p className="font-bold text-dark-grey">

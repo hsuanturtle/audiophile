@@ -9,10 +9,13 @@ import {
   DISPLAY_CART,
 } from "../utils/actions";
 const Cart = () => {
+  //USESLECTOR
   const productsInCart = useSelector((state) => state.cart.products);
   const totalPrice = useSelector((state) => state.cart.totalPrice);
   const totalProduct = useSelector((state) => state.cart.totalProduct);
   const displayCart = useSelector((state) => state.cart.display);
+  
+  //USEDISPATCH
   const dispatch = useDispatch();
   const clearCart = useCallback(() => {
     dispatch({ type: CLEAR_CART });
@@ -38,6 +41,8 @@ const Cart = () => {
     [dispatch]
   );
 
+
+  
   return (
     <div className="relative">
       <div className="overflow-y-auto fixed px-6 py-8 h-80 w-11/12 top-20 right-4 text-black bg-white z-20 rounded-xl shadow-4xl">
