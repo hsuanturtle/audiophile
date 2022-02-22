@@ -1,4 +1,6 @@
-## Available Scripts
+## AUDIOPHILE E-COMMERCE
+
+Audiophile is an e-commerce store provides different kinds of headphones, earphones, and speakers.
 
 In the project directory, you can run:
 
