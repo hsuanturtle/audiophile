@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaPlus, FaMinus } from "react-icons/fa";
@@ -14,7 +14,7 @@ const Cart = () => {
   const totalPrice = useSelector((state) => state.cart.totalPrice);
   const totalProduct = useSelector((state) => state.cart.totalProduct);
   const displayCart = useSelector((state) => state.cart.display);
-  
+
   //USEDISPATCH
   const dispatch = useDispatch();
   const clearCart = useCallback(() => {
@@ -41,8 +41,10 @@ const Cart = () => {
     [dispatch]
   );
 
+  useEffect(() => {
+    localStorage.setItem("products", JSON.stringify(productsInCart));
+  }, [productsInCart]);
 
-  
   return (
     <div className="relative">
       <div className="overflow-y-auto fixed px-6 py-8 h-80 w-11/12 top-20 right-4 text-black bg-white z-20 rounded-xl shadow-4xl">

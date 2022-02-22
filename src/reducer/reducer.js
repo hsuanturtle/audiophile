@@ -53,7 +53,6 @@ const initialState = {
   },
 };
 const reducer = (state = initialState, action = {}) => {
-  console.log({ state, action });
   switch (action.type) {
     // display cart when click on cart btn
     case DISPLAY_CART:
