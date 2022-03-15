@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import introImg from "../assets/shared/mobile/image-best-gear.jpg";
 import introImgDesktop from "../assets/shared/desktop/image-best-gear.jpg";
+import Aos from "aos";
+import "aos/dist/aos.css";
 const Intro = () => {
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
   return (
-    <div className="w-10/12 m-auto mt-14 min-h-screen text-center lg:flex lg:min-h-80 lg:items-center lg:justify-center lg:mt-10 lg:gap-40">
+    <div
+      data-aos="zoom-in"
+      className="w-10/12 m-auto mt-14 min-h-screen text-center lg:flex lg:min-h-80 lg:items-center lg:justify-center lg:mt-10 lg:gap-40"
+    >
       <div>
         <img
           className="rounded-lg lg:hidden"

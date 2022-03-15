@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import imageSpeakerMobile from "../assets/home/mobile/image-speaker-zx9.png";
 import imageSpeakerMobile2 from "../assets/home/mobile/image-speaker-zx7.jpg";
@@ -7,11 +7,19 @@ import imageSpeakerDesktop from "../assets/home/desktop/image-speaker-zx9.png";
 import imageSpeakerDesktop2 from "../assets/home/desktop/image-speaker-zx7.jpg";
 import circles from "../assets/home/desktop/pattern-circles.svg";
 import { topFunction } from "../utils/helper";
+import Aos from "aos";
+import "aos/dist/aos.css";
 const FeaturedProducts = () => {
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
   return (
     <div className="min-h-screen mt-10 text-center lg:mt-2">
       {/* SPEAKER ZX9 */}
-      <div className="bg-light-beige min-h-80 w-10/12 m-auto py-10 rounded-xl relative lg:inline-flex">
+      <div
+        data-aos="fade-right"
+        className="bg-light-beige min-h-80 w-10/12 m-auto py-10 rounded-xl relative lg:inline-flex"
+      >
         <img
           className="m-auto py-10 h-72 lg:hidden"
           src={imageSpeakerMobile}
@@ -39,7 +47,7 @@ const FeaturedProducts = () => {
         </div>
       </div>
       {/* SPEAKER ZX7 */}
-      <div className="w-10/12 m-auto mt-6 relative">
+      <div data-aos="fade-left" className="w-10/12 m-auto mt-6 relative">
         <img
           className="rounded-xl lg:hidden"
           src={imageSpeakerMobile2}
@@ -62,7 +70,7 @@ const FeaturedProducts = () => {
         </div>
       </div>
       {/* EARPHONES YX1 */}
-      <div className="lg:inline-flex lg:w-10/12">
+      <div data-aos="fade-right" className="lg:inline-flex lg:w-10/12">
         <div className="w-10/12 m-auto mt-6 lg:w-2/4">
           <img
             className="rounded-xl lg:h-40"

@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { topFunction } from "../utils/helper";
+import Aos from "aos";
+import "aos/dist/aos.css";
 const MayLike = ({ others }) => {
+  useEffect(() => {
+    Aos.init();
+  }, []);
   return (
-    <div className="m-auto w-10/12 text-center mt-32 min-h-screen xl:min-h-80">
+    <div
+      data-aos="fade-in"
+      className="m-auto w-10/12 text-center mt-32 min-h-screen xl:min-h-80"
+    >
       <h1 className="font-bold text-2xl md:text-4xl">YOU MAY ALSO LIKE</h1>
       <div className="xl:flex xl:gap-10 ">
         {others.map((item, id) => {

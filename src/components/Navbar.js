@@ -34,7 +34,7 @@ function Navbar() {
   };
 
   return (
-    <Disclosure as="nav" className="bg-black text-white ">
+    <Disclosure as="nav" className="bg-black text-white">
       {({ open }) => (
         <>
           <div className="max-w-screen px-2 sm:px-6 w-screen lg:px-8">

@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { topFunction } from "../utils/helper";
+import Aos from "aos";
+import "aos/dist/aos.css";
 const ProductList = ({ id, name, image, old, description, slug }) => {
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
+
   return (
-    <div className="w-10/12 m-auto mt-14 text-center ">
+    <div data-aos="fade-up" className="w-10/12 m-auto mt-14 text-center ">
       <div className="m-auto lg:flex lg:items-center lg:gap-14 lg:min-h-80 lg:h-2/5">
         <img
           className="rounded-xl h-4/6 m-auto lg:hidden"
